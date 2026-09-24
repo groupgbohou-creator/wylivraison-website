@@ -1,0 +1,6 @@
+{
+  "name": "Woudy Livraison",
+  "description": "Site vitrine officiel de Woudy Livraison – Le service de livraison hyperlocale de nourriture à Cocody, Abidjan en 30 minutes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
