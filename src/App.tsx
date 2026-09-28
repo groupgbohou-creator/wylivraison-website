@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RESTAURANTS_DATA } from './data/mockData';
 import { Dish, CartItem, CartItemOption } from './types';
 import { FoodyHeader } from './components/foody/FoodyHeader';
-import { FoodyBurgerShopView } from './components/foody/FoodyBurgerShopView';
+import { FoodyBurger } from './components/foody/FoodyBurgerShopView';
 import { FoodyWoudyFooter } from './components/foody/FoodyWoudyFooter';
 import { AppDownloadModal } from './components/AppDownloadModal';
 import { RestaurantCatalog } from './components/RestaurantCatalog';
