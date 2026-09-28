@@ -87,32 +87,6 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
               </a>
             </div>
 
-            {/* Official Store Logos Showcase (matching provided assets) */}
-            <div className="pt-2">
-              <span className="text-[11px] text-neutral-400 block mb-2 font-medium">
-                Logos officiels des boutiques d'applications :
-              </span>
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  onClick={onOpenAppModal}
-                  className="bg-white p-2.5 rounded-2xl border border-neutral-200 shadow-md hover:shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center w-32 h-32 group"
-                  title="Apple App Store"
-                >
-                  <AppStoreLogo variant="full" className="w-22 h-22 group-hover:scale-105 transition-transform" />
-                </button>
-
-                <a
-                  href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white p-2.5 rounded-2xl border border-neutral-200 shadow-md hover:shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center w-32 h-32 group"
-                  title="Google Play Store"
-                >
-                  <GooglePlayLogo variant="full" className="w-22 h-22 group-hover:scale-105 transition-transform" />
-                </a>
-              </div>
-            </div>
-
             {/* Send Link by SMS or WhatsApp input */}
             <div className="pt-4 max-w-md">
               <span className="text-xs text-neutral-400 block mb-2 font-medium">
