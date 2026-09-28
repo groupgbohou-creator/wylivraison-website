@@ -11,6 +11,10 @@ import { AppDownloadModal } from './components/AppDownloadModal';
 import { RestaurantCatalog } from './components/RestaurantCatalog';
 import { CoverageMap } from './components/CoverageMap';
 import { DownloadAppSection } from './components/DownloadAppSection';
+import { ContactSection } from './components/ContactSection';
+import { HomeHero } from './components/home/HomeHero';
+import { OurServicesSection } from './components/home/OurServicesSection';
+import { PartnerApplicationSection } from './components/home/PartnerApplicationSection';
 
 export default function App() {
   const burgerShopRestaurant = RESTAURANTS_DATA[0]; // Burger Shop
@@ -43,6 +47,19 @@ export default function App() {
 
   // View mode: Burger Shop (default Foody clone) vs Explore other Cocody spots
   const [viewMode, setViewMode] = useState<'burger-shop' | 'all-restaurants'>('burger-shop');
+
+  // Partner Application tab state (courier vs restaurant)
+  const [partnerTab, setPartnerTab] = useState<'courier' | 'restaurant'>('courier');
+
+  const handleNavigateSection = (sectionId: string, targetPartnerTab?: 'courier' | 'restaurant') => {
+    if (targetPartnerTab) {
+      setPartnerTab(targetPartnerTab);
+    }
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Cart operations
   const handleAddToCart = (
@@ -141,7 +158,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-neutral-50 flex flex-col font-sans selection:bg-[#FF5400] selection:text-white">
       
-      {/* 1. Foody Header */}
+      {/* 1. Foody Header with Intuitive Navigation */}
       <FoodyHeader
         currentAddress={currentAddress}
         onAddressChange={setCurrentAddress}
@@ -155,67 +172,97 @@ export default function App() {
         onDeliveryModeChange={setDeliveryMode}
         onViewAllRestaurants={() => setViewMode(viewMode === 'burger-shop' ? 'all-restaurants' : 'burger-shop')}
         showingAllRestaurants={viewMode === 'all-restaurants'}
+        onNavigateSection={handleNavigateSection}
       />
 
       {/* 2. Main Content */}
       <main className="flex-grow">
-        {viewMode === 'burger-shop' ? (
-          // Cloned Foody Cypress layout for Burger Shop
-          <SafeFoodyBurgerShopView
-            restaurant={burgerShopRestaurant}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            currentAddress={currentAddress}
-            onOpenAddressChange={() => {}}
-            deliveryMode={deliveryMode}
-            onDeliveryModeChange={setDeliveryMode}
-            cartItems={cartItems}
-            onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-            onRemoveCartItem={handleRemoveCartItem}
-            onClearCart={handleClearCart}
-            onAddToCart={handleAddToCart}
-            promoCode={promoCode}
-            onApplyPromo={handleApplyPromo}
-            onRemovePromo={handleRemovePromo}
-            discount={discount}
-            isCartDrawerOpen={isCartDrawerOpen}
-            onCloseCartDrawer={() => setIsCartDrawerOpen(false)}
-            onOpenCartDrawer={() => setIsCartDrawerOpen(true)}
-          />
-        ) : (
-          // Multi-Restaurant Discovery Mode
-          <div className="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="bg-white p-6 rounded-3xl border border-neutral-200 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl sm:text-2xl font-black text-neutral-900 font-display">
-                  Tous les restaurants partenaires Woudy à Abidjan
-                </h2>
-                <p className="text-xs sm:text-sm text-neutral-600 mt-1">
-                  Découvrez les maquis chic, pizzerias au feu de bois et adresses street food partout à Abidjan.
-                </p>
+        
+        {/* Section Héros - Présentation impactante de la plateforme */}
+        <HomeHero
+          onOrderNow={() => handleNavigateSection('commander')}
+          onExploreServices={() => handleNavigateSection('services')}
+          onOpenDownload={() => handleNavigateSection('telecharger')}
+          onOpenPartners={(tab) => handleNavigateSection('partenaires', tab)}
+        />
+
+        {/* Nos Services - Trois cartes pour Woudy Livraison, Woudy Livreur, et pour les restaurants */}
+        <OurServicesSection
+          onSelectLivraison={() => handleNavigateSection('commander')}
+          onSelectLivreur={() => handleNavigateSection('partenaires', 'courier')}
+          onSelectRestaurant={() => handleNavigateSection('partenaires', 'restaurant')}
+        />
+
+        {/* Section Commander / Menus & Burger Shop */}
+        <div id="commander" className="scroll-mt-24">
+          {viewMode === 'burger-shop' ? (
+            // Cloned Foody Cypress layout for Burger Shop
+            <SafeFoodyBurgerShopView
+              restaurant={burgerShopRestaurant}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              currentAddress={currentAddress}
+              onOpenAddressChange={() => {}}
+              deliveryMode={deliveryMode}
+              onDeliveryModeChange={setDeliveryMode}
+              cartItems={cartItems}
+              onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
+              onRemoveCartItem={handleRemoveCartItem}
+              onClearCart={handleClearCart}
+              onAddToCart={handleAddToCart}
+              promoCode={promoCode}
+              onApplyPromo={handleApplyPromo}
+              onRemovePromo={handleRemovePromo}
+              discount={discount}
+              isCartDrawerOpen={isCartDrawerOpen}
+              onCloseCartDrawer={() => setIsCartDrawerOpen(false)}
+              onOpenCartDrawer={() => setIsCartDrawerOpen(true)}
+            />
+          ) : (
+            // Multi-Restaurant Discovery Mode
+            <div className="py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+              <div className="bg-white p-6 rounded-3xl border border-neutral-200 flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-neutral-900 font-display">
+                    Tous les restaurants partenaires Woudy à Abidjan
+                  </h2>
+                  <p className="text-xs sm:text-sm text-neutral-600 mt-1">
+                    Découvrez les maquis chic, pizzerias au feu de bois et adresses street food partout à Abidjan.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setViewMode('burger-shop')}
+                  className="bg-[#FF5400] text-white font-extrabold text-xs px-4 py-2.5 rounded-xl hover:bg-[#E04B00] transition-colors cursor-pointer"
+                >
+                  Retour au menu Burger Shop
+                </button>
               </div>
-              <button
-                onClick={() => setViewMode('burger-shop')}
-                className="bg-[#FF5400] text-white font-extrabold text-xs px-4 py-2.5 rounded-xl hover:bg-[#E04B00] transition-colors cursor-pointer"
-              >
-                Retour au menu Burger Shop
-              </button>
+
+              <RestaurantCatalog
+                onOpenAppModal={() => setAppModalOpen(true)}
+              />
+
+              <CoverageMap
+                initialAddress={currentAddress}
+                onOpenAppModal={() => setAppModalOpen(true)}
+              />
             </div>
+          )}
+        </div>
 
-            <RestaurantCatalog
-              onOpenAppModal={() => setAppModalOpen(true)}
-            />
+        {/* Téléchargement d'Applications - Liens pour Apple et Android avec liens officiels */}
+        <DownloadAppSection
+          onOpenAppModal={() => setAppModalOpen(true)}
+        />
 
-            <CoverageMap
-              initialAddress={currentAddress}
-              onOpenAppModal={() => setAppModalOpen(true)}
-            />
+        {/* Section Partenaires - Deux formulaires de candidature interactifs (Livreur & Restaurant) */}
+        <PartnerApplicationSection
+          initialTab={partnerTab}
+        />
 
-            <DownloadAppSection
-              onOpenAppModal={() => setAppModalOpen(true)}
-            />
-          </div>
-        )}
+        {/* Section Contact & Support */}
+        <ContactSection />
+
       </main>
 
       {/* 3. Official Woudy Legal Footer */}

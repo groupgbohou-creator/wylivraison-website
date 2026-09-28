@@ -11,7 +11,10 @@ import {
   Sparkles,
   ArrowLeft,
   X,
-  Smartphone
+  Smartphone,
+  Bike,
+  Store,
+  Layers
 } from 'lucide-react';
 import { WoudyWordmark } from '../WoudyWordmark';
 
@@ -28,6 +31,7 @@ interface FoodyHeaderProps {
   onDeliveryModeChange: (mode: 'delivery' | 'pickup') => void;
   onViewAllRestaurants?: () => void;
   showingAllRestaurants?: boolean;
+  onNavigateSection?: (sectionId: string, partnerTab?: 'courier' | 'restaurant') => void;
 }
 
 export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
@@ -42,7 +46,8 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
   deliveryMode,
   onDeliveryModeChange,
   onViewAllRestaurants,
-  showingAllRestaurants = false
+  showingAllRestaurants = false,
+  onNavigateSection
 }) => {
   const [addressModalOpen, setAddressModalOpen] = useState(false);
   const [inputAddress, setInputAddress] = useState(currentAddress);
@@ -275,6 +280,94 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               <X className="w-3.5 h-3.5" />
             </button>
           )}
+        </div>
+      </div>
+
+      {/* Services Navigation Bar - Navigation Intuitive & Accès Rapide à Tous les Services */}
+      <div className="bg-neutral-100/90 border-t border-neutral-200/90 py-2 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 overflow-x-auto scrollbar-none">
+          <nav className="flex items-center gap-1 sm:gap-2 text-xs font-extrabold flex-nowrap shrink-0">
+            <a 
+              href="#accueil" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('accueil');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap"
+            >
+              Accueil
+            </a>
+
+            <a 
+              href="#commander" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('commander');
+              }}
+              className="px-3 py-1.5 rounded-xl text-[#FF5400] bg-orange-50 hover:bg-orange-100/80 border border-orange-200 transition-all whitespace-nowrap flex items-center gap-1.5 shadow-xs"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>Commander / Menu</span>
+            </a>
+
+            <a 
+              href="#services" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('services');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap"
+            >
+              Nos Services
+            </a>
+
+            <a 
+              href="#telecharger" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('telecharger');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
+            >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>Applications</span>
+            </a>
+
+            <a 
+              href="#partenaires" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('partenaires', 'courier');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
+            >
+              <Bike className="w-3.5 h-3.5 text-[#FF5400]" />
+              <span>Devenir Livreur</span>
+            </a>
+
+            <a 
+              href="#partenaires" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('partenaires', 'restaurant');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
+            >
+              <Store className="w-3.5 h-3.5 text-[#FF5400]" />
+              <span>Espace Restaurant</span>
+            </a>
+
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSection?.('contact');
+              }}
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap"
+            >
+              Contact & Support
+            </a>
+          </nav>
         </div>
       </div>
 
