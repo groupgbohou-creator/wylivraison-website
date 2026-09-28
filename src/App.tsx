@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { RESTAURANTS_DATA } from './data/mockData';
 import { Dish, CartItem, CartItemOption } from './types';
 import { FoodyHeader } from './components/foody/FoodyHeader';
-import { FoodyBurger } from './components/foody/FoodyBurgerShopView';
+import FoodyBurgerShopView, { FoodyBurgerShopView as FoodyBurgerShopViewNamed } from './components/foody/FoodyBurgerShopView';
 import { FoodyWoudyFooter } from './components/foody/FoodyWoudyFooter';
+
+// Resilient component reference ensuring FoodyBurgerShopView is never undefined
+const SafeFoodyBurgerShopView = FoodyBurgerShopView || FoodyBurgerShopViewNamed;
 import { AppDownloadModal } from './components/AppDownloadModal';
 import { RestaurantCatalog } from './components/RestaurantCatalog';
 import { CoverageMap } from './components/CoverageMap';
@@ -158,7 +161,7 @@ export default function App() {
       <main className="flex-grow">
         {viewMode === 'burger-shop' ? (
           // Cloned Foody Cypress layout for Burger Shop
-          <FoodyBurgerShopView
+          <SafeFoodyBurgerShopView
             restaurant={burgerShopRestaurant}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}

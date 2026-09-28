@@ -44,7 +44,7 @@ interface FoodyBurgerShopViewProps {
   onOpenCartDrawer: () => void;
 }
 
-export const FoodyBurgerShopView: React.FC<FoodyBurgerShopViewProps> = ({
+export function FoodyBurgerShopView({
   restaurant,
   searchQuery,
   onSearchChange,
@@ -64,7 +64,7 @@ export const FoodyBurgerShopView: React.FC<FoodyBurgerShopViewProps> = ({
   isCartDrawerOpen,
   onCloseCartDrawer,
   onOpenCartDrawer
-}) => {
+}: FoodyBurgerShopViewProps) {
   const [activeCategory, setActiveCategory] = useState('Populaire');
   const [selectedDishForModal, setSelectedDishForModal] = useState<Dish | null>(null);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
@@ -372,4 +372,6 @@ export const FoodyBurgerShopView: React.FC<FoodyBurgerShopViewProps> = ({
 
     </div>
   );
-};
+}
+
+export default FoodyBurgerShopView;
