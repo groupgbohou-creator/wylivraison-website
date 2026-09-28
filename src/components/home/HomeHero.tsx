@@ -165,13 +165,15 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                 <span>Devenir Livreur</span>
               </button>
 
-              <button
-                onClick={() => onOpenPartners('restaurant')}
-                className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-700 hover:text-[#FF5400] px-3 py-3 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
+              <a
+                href="http://213.199.59.185:3000/auth/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-800 hover:text-[#FF5400] px-3 py-3 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
               >
                 <Store className="w-4 h-4 text-[#FF5400]" />
-                <span>Espace Restaurant</span>
-              </button>
+                <span>Devenez restaurant partenaire</span>
+              </a>
             </div>
 
             {/* Trust Micro-Metrics */}

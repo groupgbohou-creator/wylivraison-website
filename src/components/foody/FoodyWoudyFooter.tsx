@@ -196,6 +196,17 @@ export const FoodyWoudyFooter: React.FC = () => {
                   Conditions des Livreurs Partenaires
                 </button>
               </li>
+              <li className="pt-2 border-t border-neutral-800">
+                <a
+                  href="http://213.199.59.185:3000/auth/register"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-400 hover:text-orange-300 font-bold transition-colors inline-flex items-center gap-1"
+                >
+                  <span>Devenez restaurant partenaire</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
 

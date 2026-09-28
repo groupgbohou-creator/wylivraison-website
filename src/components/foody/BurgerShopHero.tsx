@@ -72,7 +72,8 @@ export const BurgerShopHero: React.FC<BurgerShopHeroProps> = ({
                     url: window.location.href,
                   }).catch(() => {});
                 } else {
-                  alert('Lien du menu Burger Shop copié dans votre presse-papier !');
+                  // copied quietly
+                  navigator.clipboard?.writeText(window.location.href).catch(() => {});
                 }
               }}
               className="p-2.5 rounded-full bg-white/90 hover:bg-white text-neutral-800 backdrop-blur-md shadow-md transition-all cursor-pointer"
@@ -81,7 +82,7 @@ export const BurgerShopHero: React.FC<BurgerShopHeroProps> = ({
               <Share2 className="w-4 h-4" />
             </button>
             <button
-              onClick={() => alert('Burger Shop a été ajouté à vos favoris Woudy !')}
+              onClick={() => console.log('Favori')}
               className="p-2.5 rounded-full bg-white/90 hover:bg-white text-neutral-800 hover:text-red-500 backdrop-blur-md shadow-md transition-all cursor-pointer"
               title="Ajouter aux favoris"
             >

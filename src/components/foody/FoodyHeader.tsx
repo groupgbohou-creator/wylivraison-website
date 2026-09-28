@@ -346,15 +346,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
             </a>
 
             <a 
-              href="#partenaires" 
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigateSection?.('partenaires', 'restaurant');
-              }}
-              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
+              href="http://213.199.59.185:3000/auth/register" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1 font-semibold"
             >
               <Store className="w-3.5 h-3.5 text-[#FF5400]" />
-              <span>Espace Restaurant</span>
+              <span>Devenez restaurant partenaire</span>
             </a>
 
             <a 

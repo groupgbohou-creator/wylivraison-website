@@ -82,7 +82,7 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
               href="#ios-download"
               onClick={(e) => {
                 e.preventDefault();
-                alert("Redirection vers l'App Store Apple (iOS)...");
+                // iOS redirection
               }}
               className="flex items-center gap-3 p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group"
             >

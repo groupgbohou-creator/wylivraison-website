@@ -481,16 +481,32 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
               <form onSubmit={handleRestaurantSubmit} className="space-y-8">
                 
                 {/* Form Introduction Header */}
-                <div className="border-b border-neutral-100 pb-5">
-                  <div className="flex items-center gap-2 text-xs font-bold text-neutral-900 mb-1">
-                    <Store className="w-4 h-4 text-[#FF5400]" />
-                    <span>Programme Partenaires Restaurants</span>
+                <div className="border-b border-neutral-100 pb-5 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-neutral-900 mb-1">
+                        <Store className="w-4 h-4 text-[#FF5400]" />
+                        <span>Programme Partenaires Restaurants</span>
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-neutral-900 font-display">
+                        Inscrire votre Restaurant / Maquis sur Woudy
+                      </h3>
+                    </div>
+
+                    <a
+                      href="http://213.199.59.185:3000/auth/register"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-[#FF5400] hover:bg-[#E04B00] text-white text-xs sm:text-sm font-extrabold px-4 py-2.5 rounded-xl shadow-xs transition-all active:scale-98 shrink-0"
+                    >
+                      <Store className="w-4 h-4" />
+                      <span>Devenez restaurant partenaire</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-neutral-900 font-display">
-                    Inscrire votre Restaurant / Maquis sur Woudy
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 mt-1">
-                    Bénéficiez immédiatement de notre flotte de coursiers scellés, de notre logiciel de caisse et touchez des milliers de clients fidèles à Abidjan.
+
+                  <p className="text-xs sm:text-sm text-neutral-600">
+                    Bénéficiez immédiatement de notre flotte de coursiers scellés, de notre logiciel de caisse et touchez des milliers de clients fidèles à Abidjan. Remplissez le formulaire ci-dessous ou créez directement votre compte marchand via le bouton ci-dessus.
                   </p>
                 </div>
 

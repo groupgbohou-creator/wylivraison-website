@@ -184,13 +184,22 @@ export const OurServicesSection: React.FC<OurServicesSectionProps> = ({
             </div>
 
             {/* Action CTA */}
-            <div>
-              <button
-                onClick={onSelectRestaurant}
-                className="w-full bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-98"
+            <div className="space-y-2">
+              <a
+                href="http://213.199.59.185:3000/auth/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#FF5400] hover:bg-[#E04B00] text-white font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-98"
               >
-                <span>Inscrire mon Restaurant</span>
+                <span>Devenez restaurant partenaire</span>
                 <ArrowRight className="w-4 h-4" />
+              </a>
+              <button
+                type="button"
+                onClick={onSelectRestaurant}
+                className="w-full text-center text-xs text-neutral-500 hover:text-neutral-900 font-semibold py-1 transition-colors cursor-pointer"
+              >
+                Ou remplir la demande en ligne ci-dessous ↓
               </button>
             </div>
           </div>
