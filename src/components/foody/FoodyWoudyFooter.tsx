@@ -13,6 +13,8 @@ import {
   X
 } from 'lucide-react';
 import { WoudyWordmark } from '../WoudyWordmark';
+import { GooglePlayLogo } from '../GooglePlayLogo';
+import { AppStoreLogo } from '../AppStoreLogo';
 
 export const FoodyWoudyFooter: React.FC = () => {
   const [activeLegalModal, setActiveLegalModal] = useState<string | null>(null);
@@ -219,32 +221,27 @@ export const FoodyWoudyFooter: React.FC = () => {
               Téléchargez l'application officielle Woudy pour suivre vos livraisons de burgers en direct par GPS.
             </p>
 
-            {/* Official Google Play Store Button */}
+            {/* Official Google Play Store & App Store Buttons */}
             <div className="space-y-2 pt-1">
               <a
                 href={googlePlayUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 p-2.5 rounded-2xl transition-all group cursor-pointer"
+                className="flex items-center bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 p-2.5 rounded-2xl transition-all group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-xl bg-black flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3.609 1.814L13.792 12 3.61 22.186a2.404 2.404 0 0 1-.61-.954V2.768c.174-.37.388-.696.61-.954zm11.597 11.598l2.584 2.584-12.78 7.379 10.196-9.963zm0-2.824L5.01 0.625l12.78 7.38-2.584 2.583zm1.414 1.412l3.784 2.185c1.065.615 1.065 1.623 0 2.238l-3.784 2.185-2.122-2.122 2.122-2.486z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <span className="text-[9px] uppercase tracking-wider text-neutral-400 block font-semibold">
-                    Disponible sur
-                  </span>
-                  <span className="text-xs font-black text-white group-hover:text-orange-400 transition-colors">
-                    Google Play Store
-                  </span>
-                </div>
+                <GooglePlayLogo variant="badge" />
+              </a>
+
+              <a
+                href="#telecharger"
+                className="flex items-center bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 p-2.5 rounded-2xl transition-all group cursor-pointer"
+              >
+                <AppStoreLogo variant="badge" theme="dark" />
               </a>
 
               {/* Direct Play Store Link pasted below the button as requested */}
               <div className="pt-1">
-                <span className="text-[10px] text-neutral-500 block mb-1">Lien direct :</span>
+                <span className="text-[10px] text-neutral-500 block mb-1">Lien direct Play Store :</span>
                 <a
                   href={googlePlayUrl}
                   target="_blank"

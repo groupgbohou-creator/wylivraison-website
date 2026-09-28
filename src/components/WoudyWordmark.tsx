@@ -7,9 +7,9 @@ interface WoudyWordmarkProps extends React.SVGProps<SVGSVGElement> {
 
 /**
  * Woudy Authentic Hand-drawn Brush Script Wordmark
- * Faithfully vectorized from the brand photo (1000004010.png)
- * Features the distinctive energetic tall ascender, connected cursive loops,
- * and playful rounded descender terminal.
+ * Faithfully vectorized from the user brand asset (1000004010.png)
+ * Features the signature energetic tall ascender on 'W', fluid connected cursive 'o', 'u', 'd',
+ * and the graceful descending loop tail on 'y'.
  */
 export const WoudyWordmark: React.FC<WoudyWordmarkProps> = ({
   color = "#FF5400",
@@ -18,7 +18,7 @@ export const WoudyWordmark: React.FC<WoudyWordmarkProps> = ({
 }) => {
   return (
     <svg
-      viewBox="0 0 520 280"
+      viewBox="0 0 640 320"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -27,64 +27,85 @@ export const WoudyWordmark: React.FC<WoudyWordmarkProps> = ({
     >
       <g
         stroke={color}
-        strokeWidth="25"
+        strokeWidth="28"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {/* Letter W - Left lobe, middle lobe, and towering signature ascender */}
+        {/* Letter W - Scoop 1, Scoop 2, and towering right ascender from 1000004010.png */}
         <path d="
-          M 46 88
-          C 40 125, 34 168, 44 200
-          C 50 220, 68 226, 80 205
-          C 92 184, 98 135, 100 115
-          C 102 142, 100 195, 114 216
-          C 126 235, 145 228, 154 200
-          C 170 148, 182 82, 192 34
+          M 52 110
+          C 44 145, 38 185, 48 214
+          C 56 236, 76 238, 92 210
+          C 106 182, 114 135, 118 112
+        " />
+        <path d="
+          M 118 112
+          C 120 148, 122 198, 138 222
+          C 152 242, 175 238, 188 200
+          C 205 145, 222 75, 232 24
         " />
 
-        {/* Connection from base of W to "o" */}
+        {/* Fluid connection from W to 'o' */}
         <path d="
-          M 160 195
-          C 174 212, 194 220, 214 206
+          M 218 135
+          C 214 175, 206 205, 196 226
+          C 192 235, 202 240, 214 235
+          C 228 228, 238 212, 246 195
         " />
 
-        {/* Letter o - Oval loop with smooth counter-clockwise flow */}
+        {/* Letter 'o' - Round counter-clockwise loop */}
         <path d="
-          M 218 178
-          C 204 150, 222 120, 246 122
-          C 270 124, 276 154, 272 178
-          C 268 204, 238 214, 220 186
-          C 214 176, 218 152, 238 140
-          C 255 130, 276 142, 282 165
+          M 246 195
+          C 232 170, 244 135, 268 135
+          C 292 135, 305 165, 305 195
+          C 305 225, 280 238, 258 234
+          C 240 230, 232 208, 242 185
+          C 252 162, 275 148, 295 152
+          C 310 156, 318 172, 324 186
         " />
 
-        {/* Letter u - Continuous double trough connecting to d */}
+        {/* Letter 'u' - Double scoop flowing smoothly */}
         <path d="
-          M 284 165
-          C 290 195, 302 216, 318 214
-          C 334 212, 342 185, 345 152
-          C 346 178, 350 214, 368 214
-          C 384 214, 396 188, 404 155
+          M 324 186
+          C 328 208, 334 236, 354 236
+          C 372 236, 380 212, 386 186
+        " />
+        <path d="
+          M 386 186
+          C 390 208, 396 236, 416 236
+          C 434 236, 442 212, 448 186
         " />
 
-        {/* Letter d - Distinctive energetic arched hump */}
+        {/* Letter 'd' - Round belly + tall straight ascender */}
         <path d="
-          M 404 155
-          C 410 125, 424 106, 440 112
-          C 454 118, 452 148, 444 180
-          C 438 205, 448 218, 460 214
+          M 448 186
+          C 438 208, 432 236, 452 236
+          C 472 236, 482 210, 486 186
+          C 486 162, 472 152, 456 156
+          C 442 160, 438 180, 442 205
+        " />
+        <path d="
+          M 486 86
+          L 486 232
+          C 488 238, 498 240, 506 234
         " />
 
-        {/* Letter y - Slanted body and sweeping below-baseline descender flick */}
+        {/* Letter 'y' - Trough + elegant curved descender loop */}
         <path d="
-          M 460 214
-          C 475 192, 492 152, 498 128
-          C 496 155, 480 205, 466 235
-          C 448 274, 432 292, 420 278
-          C 410 266, 422 248, 442 232
-          C 462 216, 488 190, 508 168
+          M 508 186
+          C 512 208, 518 236, 536 236
+          C 552 236, 560 212, 566 186
+        " />
+        <path d="
+          M 566 186
+          L 548 268
+          C 538 312, 516 332, 492 330
+          C 470 328, 462 308, 478 285
+          C 498 256, 545 228, 592 208
         " />
       </g>
     </svg>
   );
 };
+
+export default WoudyWordmark;

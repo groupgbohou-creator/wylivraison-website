@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 560" fill="none">
+  <!-- Google Play Official Triangle Icon -->
+  <g transform="translate(50, 20)">
+    <defs>
+      <linearGradient id="gp_cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00C3FF"/>
+        <stop offset="100%" stop-color="#0077F5"/>
+      </linearGradient>
+      <linearGradient id="gp_green" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00E676"/>
+        <stop offset="100%" stop-color="#00B0FF"/>
+      </linearGradient>
+      <linearGradient id="gp_yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFD600"/>
+        <stop offset="100%" stop-color="#FF9100"/>
+      </linearGradient>
+      <linearGradient id="gp_red" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF334C"/>
+        <stop offset="100%" stop-color="#BA000D"/>
+      </linearGradient>
+    </defs>
+    
+    <!-- Base Blue / Cyan Left Wedge -->
+    <path d="M 42 28 C 30 35 24 48 24 64 L 24 336 C 24 352 30 365 42 372 L 210 200 Z" fill="url(#gp_cyan)"/>
+    
+    <!-- Top Green Wedge -->
+    <path d="M 264 146 L 42 28 C 50 24 60 25 72 32 L 282 153 Z" fill="url(#gp_green)"/>
+    
+    <!-- Right Amber Wedge -->
+    <path d="M 282 153 L 340 186 C 358 196 358 204 340 214 L 282 247 L 210 200 Z" fill="url(#gp_yellow)"/>
+    
+    <!-- Bottom Red Wedge -->
+    <path d="M 42 372 C 32 367 25 358 24 346 L 210 200 L 282 247 L 72 368 C 60 375 50 376 42 372 Z" fill="url(#gp_red)"/>
+  </g>
+
+  <!-- Google Play Wordmark Text -->
+  <g fill="#3c4043" font-family="'Product Sans', 'Google Sans', 'Nunito', 'Segoe UI', sans-serif">
+    <text x="250" y="490" text-anchor="middle" font-size="62" font-weight="600" letter-spacing="-0.5">Google Play</text>
+  </g>
+</svg>

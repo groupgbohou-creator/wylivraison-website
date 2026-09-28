@@ -10,12 +10,13 @@ import {
   Clock, 
   ShieldCheck, 
   FileText, 
-  Sparkles,
-  AlertCircle,
-  HelpCircle,
-  ExternalLink,
-  MessageCircle
+  Sparkles, 
+  AlertCircle, 
+  HelpCircle, 
+  ExternalLink, 
+  MessageCircle 
 } from 'lucide-react';
+import { GooglePlayLogo } from '../GooglePlayLogo';
 
 interface PartnerApplicationSectionProps {
   initialTab?: 'courier' | 'restaurant';
@@ -171,10 +172,9 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
                     href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 border border-neutral-700"
                   >
-                    <Smartphone className="w-4 h-4 text-[#FF5400]" />
-                    <span>Télécharger l'App Livreur sur Play Store</span>
+                    <GooglePlayLogo variant="badge" />
                   </a>
 
                   <button

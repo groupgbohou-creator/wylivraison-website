@@ -11,6 +11,8 @@ import {
   Send 
 } from 'lucide-react';
 import { WoudyLogoMark } from './WoudyLogo';
+import { GooglePlayLogo } from './GooglePlayLogo';
+import { AppStoreLogo } from './AppStoreLogo';
 
 interface DownloadAppSectionProps {
   onOpenAppModal: () => void;
@@ -58,13 +60,9 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
               {/* Apple App Store */}
               <button
                 onClick={onOpenAppModal}
-                className="flex items-center gap-3 bg-white text-neutral-950 hover:bg-neutral-100 font-bold px-5 py-3 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
+                className="flex items-center bg-white text-neutral-950 hover:bg-neutral-100 font-bold px-5 py-2.5 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
               >
-                <Apple className="w-7 h-7 fill-current" />
-                <div className="text-left">
-                  <span className="text-[10px] text-neutral-500 block uppercase leading-none">Télécharger sur</span>
-                  <span className="text-sm font-black font-display">App Store</span>
-                </div>
+                <AppStoreLogo variant="badge" theme="light" />
               </button>
 
               {/* Google Play */}
@@ -72,15 +70,9 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-700 font-bold px-5 py-3 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
+                className="flex items-center bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-700 font-bold px-5 py-2.5 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
               >
-                <div className="w-7 h-7 flex items-center justify-center text-orange-400">
-                  <Play className="w-6 h-6 fill-orange-400" />
-                </div>
-                <div className="text-left">
-                  <span className="text-[10px] text-neutral-400 block uppercase leading-none">Disponible sur</span>
-                  <span className="text-sm font-black font-display">Google Play</span>
-                </div>
+                <GooglePlayLogo variant="badge" />
               </a>
 
               {/* WhatsApp Direct Order */}
@@ -93,6 +85,32 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
                 <MessageCircle className="w-5 h-5 fill-white" />
                 <span>Commander via WhatsApp (+225 07 20 58 41 71)</span>
               </a>
+            </div>
+
+            {/* Official Store Logos Showcase (matching provided assets) */}
+            <div className="pt-2">
+              <span className="text-[11px] text-neutral-400 block mb-2 font-medium">
+                Logos officiels des boutiques d'applications :
+              </span>
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  onClick={onOpenAppModal}
+                  className="bg-white p-2.5 rounded-2xl border border-neutral-200 shadow-md hover:shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center w-32 h-32 group"
+                  title="Apple App Store"
+                >
+                  <AppStoreLogo variant="full" className="w-22 h-22 group-hover:scale-105 transition-transform" />
+                </button>
+
+                <a
+                  href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white p-2.5 rounded-2xl border border-neutral-200 shadow-md hover:shadow-xl transition-all cursor-pointer flex flex-col items-center justify-center w-32 h-32 group"
+                  title="Google Play Store"
+                >
+                  <GooglePlayLogo variant="full" className="w-22 h-22 group-hover:scale-105 transition-transform" />
+                </a>
+              </div>
             </div>
 
             {/* Send Link by SMS or WhatsApp input */}

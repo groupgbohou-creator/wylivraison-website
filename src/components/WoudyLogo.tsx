@@ -8,7 +8,8 @@ interface WoudyLogoMarkProps extends React.SVGProps<SVGSVGElement> {
 
 /**
  * Official Woudy Logomark
- * Vector reproduction based on brand identity asset
+ * Exact vector reproduction of the cursive initial 'W' from 1000004010.png
+ * Features the signature energetic double scoop and towering ascender.
  */
 export const WoudyLogoMark: React.FC<WoudyLogoMarkProps> = ({
   color = '#FF5400',
@@ -17,48 +18,24 @@ export const WoudyLogoMark: React.FC<WoudyLogoMarkProps> = ({
 }) => {
   return (
     <svg
-      viewBox="0 0 160 110"
+      viewBox="0 0 240 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="Logo Woudy"
       {...props}
     >
-      {/* Outer sculpted body with symmetrical eye cutouts */}
-      <path
-        fill={color}
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="
-          M 44 14
-          L 116 14
-          C 134 14 148 28 148 46
-          C 148 64 134 82 114 82
-          C 100 82 92 71 80 58
-          C 68 71 60 82 46 82
-          C 26 82 12 64 12 46
-          C 12 28 26 14 44 14
-          Z
-          M 47 30
-          C 38.5 30 32.5 36 32.5 44.5
-          L 32.5 51.5
-          C 32.5 60 38.5 66 47 66
-          C 55.5 66 61.5 60 61.5 51.5
-          L 61.5 44.5
-          C 61.5 36 55.5 30 47 30
-          Z
-          M 113 30
-          C 104.5 30 98.5 36 98.5 44.5
-          L 98.5 51.5
-          C 98.5 60 104.5 66 113 66
-          C 121.5 66 127.5 60 127.5 51.5
-          L 127.5 44.5
-          C 127.5 36 121.5 30 113 30
-          Z
-        "
-      />
-      {/* Bottom central anchor dot */}
-      <circle cx="80" cy="78" r="9.5" fill={color} />
+      <g
+        stroke={color}
+        strokeWidth="32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {/* Left scoop */}
+        <path d="M 40 95 C 32 135 28 175 42 205 C 52 225 72 225 86 195 C 98 170 106 125 110 105" />
+        {/* Right scoop & towering signature ascender */}
+        <path d="M 110 105 C 112 135 114 185 128 208 C 140 228 162 225 174 190 C 190 140 205 75 214 26" />
+      </g>
     </svg>
   );
 };
@@ -70,13 +47,13 @@ interface WoudyLogoProps {
 }
 
 export const WoudyLogo: React.FC<WoudyLogoProps> = ({
-  variant = 'navbar',
   className = '',
-  showSubtitle = false
 }) => {
   return (
     <div className={`flex items-center ${className}`}>
-      <WoudyWordmark className="h-9 sm:h-10 w-auto" color="#FF5400" />
+      <WoudyWordmark className="h-9 sm:h-11 w-auto" color="#FF5400" />
     </div>
   );
 };
+
+export default WoudyLogo;

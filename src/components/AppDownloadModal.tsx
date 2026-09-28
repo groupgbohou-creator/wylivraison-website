@@ -12,6 +12,8 @@ import {
   Send
 } from 'lucide-react';
 import { WoudyLogoMark } from './WoudyLogo';
+import { GooglePlayLogo } from './GooglePlayLogo';
+import { AppStoreLogo } from './AppStoreLogo';
 
 interface AppDownloadModalProps {
   isOpen: boolean;
@@ -74,6 +76,16 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
         {/* Modal Body */}
         <div className="p-6 sm:p-8 space-y-6">
           
+          {/* Official Store Logos Visuals (from user assets) */}
+          <div className="flex items-center justify-center gap-4 py-1">
+            <div className="bg-white p-3 rounded-2xl border border-neutral-200 shadow-xs flex flex-col items-center justify-center w-28 h-28">
+              <AppStoreLogo variant="full" className="w-20 h-20" />
+            </div>
+            <div className="bg-white p-3 rounded-2xl border border-neutral-200 shadow-xs flex flex-col items-center justify-center w-28 h-28">
+              <GooglePlayLogo variant="full" className="w-20 h-20" />
+            </div>
+          </div>
+
           {/* Quick Buttons Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
@@ -84,14 +96,12 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
                 e.preventDefault();
                 // iOS redirection
               }}
-              className="flex items-center gap-3 p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group"
+              className="flex items-center justify-between p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group border border-neutral-700/60"
             >
-              <Apple className="w-8 h-8 fill-white shrink-0 group-hover:scale-105 transition-transform" />
-              <div className="text-left">
-                <span className="text-[10px] text-neutral-400 block uppercase">Télécharger sur</span>
-                <span className="text-sm font-extrabold font-display">App Store</span>
-                <span className="text-[10px] text-orange-400 block mt-0.5">Compatible iOS 15+</span>
-              </div>
+              <AppStoreLogo variant="badge" theme="dark" />
+              <span className="text-[10px] text-orange-400 font-bold bg-orange-950/60 px-2 py-0.5 rounded border border-orange-500/30">
+                iOS 15+
+              </span>
             </a>
 
             {/* Android Button */}
@@ -100,16 +110,12 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group border border-neutral-700/60 hover:border-[#FF5400]/50"
+                className="flex items-center justify-between p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group border border-neutral-700/60 hover:border-[#FF5400]/50"
               >
-                <div className="w-8 h-8 flex items-center justify-center text-orange-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <Play className="w-7 h-7 fill-orange-400" />
-                </div>
-                <div className="text-left">
-                  <span className="text-[10px] text-neutral-400 block uppercase">Disponible sur</span>
-                  <span className="text-sm font-extrabold font-display">Google Play</span>
-                  <span className="text-[10px] text-orange-400 block mt-0.5">Woudy Livreur (Android)</span>
-                </div>
+                <GooglePlayLogo variant="badge" />
+                <span className="text-[10px] text-orange-400 font-bold bg-orange-950/60 px-2 py-0.5 rounded border border-orange-500/30">
+                  Android 9+
+                </span>
               </a>
               <a
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"

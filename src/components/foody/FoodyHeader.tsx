@@ -17,6 +17,7 @@ import {
   Layers
 } from 'lucide-react';
 import { WoudyWordmark } from '../WoudyWordmark';
+import { GooglePlayLogo } from '../GooglePlayLogo';
 
 interface FoodyHeaderProps {
   currentAddress: string;
@@ -126,9 +127,9 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:flex items-center gap-1 hover:text-white transition-colors text-orange-400 font-medium"
+              className="hidden lg:flex items-center gap-1.5 hover:text-white transition-colors text-neutral-300 font-medium"
             >
-              <Smartphone className="w-3 h-3 text-[#FF5400]" />
+              <GooglePlayLogo variant="icon" className="w-3.5 h-3.5" />
               <span>App Livreur Play Store</span>
             </a>
           </div>

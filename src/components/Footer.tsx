@@ -13,6 +13,8 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { WoudyLogoMark } from './WoudyLogo';
+import { GooglePlayLogo } from './GooglePlayLogo';
+import { AppStoreLogo } from './AppStoreLogo';
 
 interface FooterProps {
   onOpenAppModal: () => void;
@@ -93,22 +95,20 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             {/* App Store Buttons */}
-            <div className="flex items-center gap-2 pt-2">
+            <div className="flex items-center gap-3 pt-2">
               <button
                 onClick={onOpenAppModal}
-                className="flex items-center gap-2 px-3 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-xl border border-neutral-700 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="flex items-center px-3 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-xl border border-neutral-700 transition-colors cursor-pointer"
               >
-                <Apple className="w-4 h-4 fill-current" />
-                <span>App Store</span>
+                <AppStoreLogo variant="badge" theme="dark" />
               </button>
               <a
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-xl border border-neutral-700 text-xs font-semibold text-white transition-colors cursor-pointer"
+                className="flex items-center px-3 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-xl border border-neutral-700 transition-colors cursor-pointer"
               >
-                <Play className="w-4 h-4 fill-orange-400 text-orange-400" />
-                <span>Google Play</span>
+                <GooglePlayLogo variant="badge" />
               </a>
             </div>
           </div>
