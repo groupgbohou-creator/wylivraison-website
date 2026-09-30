@@ -13,6 +13,7 @@ import {
   MapPin,
   HeartHandshake
 } from 'lucide-react';
+import { trackApplyCourierClick, trackBecomePartnerClick } from '../../utils/analytics';
 
 interface OurServicesSectionProps {
   onSelectLivraison: () => void;
@@ -138,7 +139,10 @@ export const OurServicesSection: React.FC<OurServicesSectionProps> = ({
             {/* Action CTA */}
             <div>
               <button
-                onClick={onSelectLivreur}
+                onClick={() => {
+                  trackApplyCourierClick({ location: 'services_card_livreur', action: 'open_tab' });
+                  onSelectLivreur();
+                }}
                 className="w-full bg-white hover:bg-neutral-100 text-neutral-900 font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-98"
               >
                 <span>Postuler comme Livreur</span>
@@ -189,6 +193,13 @@ export const OurServicesSection: React.FC<OurServicesSectionProps> = ({
                 href="http://213.199.59.185:3000/auth/register"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackBecomePartnerClick({
+                    location: 'services_card_restaurant',
+                    action: 'open_portal',
+                    details: { url: 'http://213.199.59.185:3000/auth/register' }
+                  });
+                }}
                 className="w-full bg-[#FF5400] hover:bg-[#E04B00] text-white font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-98"
               >
                 <span>Devenez restaurant partenaire</span>
@@ -196,7 +207,13 @@ export const OurServicesSection: React.FC<OurServicesSectionProps> = ({
               </a>
               <button
                 type="button"
-                onClick={onSelectRestaurant}
+                onClick={() => {
+                  trackBecomePartnerClick({
+                    location: 'services_card_restaurant_scroll_form',
+                    action: 'open_form'
+                  });
+                  onSelectRestaurant();
+                }}
                 className="w-full text-center text-xs text-neutral-500 hover:text-neutral-900 font-semibold py-1 transition-colors cursor-pointer"
               >
                 Ou remplir la demande en ligne ci-dessous ↓

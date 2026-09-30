@@ -17,6 +17,10 @@ import {
   MessageCircle 
 } from 'lucide-react';
 import { GooglePlayLogo } from '../GooglePlayLogo';
+import { 
+  trackApplyCourierClick, 
+  trackBecomePartnerClick 
+} from '../../utils/analytics';
 
 interface PartnerApplicationSectionProps {
   initialTab?: 'courier' | 'restaurant';
@@ -67,6 +71,15 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
     e.preventDefault();
     if (!courierForm.fullName || !courierForm.phone) return;
 
+    trackApplyCourierClick({
+      location: 'courier_application_form',
+      action: 'submit_application',
+      details: {
+        zone: courierForm.zone,
+        transport: courierForm.transport,
+      },
+    });
+
     setCourierSubmitting(true);
     setTimeout(() => {
       const dossierId = `WDY-LIV-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -78,6 +91,16 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
   const handleRestaurantSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!restaurantForm.restaurantName || !restaurantForm.managerName || !restaurantForm.phone) return;
+
+    trackBecomePartnerClick({
+      location: 'restaurant_application_form',
+      action: 'submit_application',
+      details: {
+        restaurantName: restaurantForm.restaurantName,
+        zone: restaurantForm.zone,
+        cuisineType: restaurantForm.cuisineType,
+      },
+    });
 
     setRestaurantSubmitting(true);
     setTimeout(() => {
@@ -109,7 +132,10 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
         {/* Tab Switcher - Anti-slop interactive segmented button */}
         <div className="max-w-md mx-auto mb-10 p-1.5 bg-neutral-200/80 rounded-2xl flex items-center shadow-inner">
           <button
-            onClick={() => setActiveTab('courier')}
+            onClick={() => {
+              trackApplyCourierClick({ location: 'partner_tab_switcher', action: 'open_tab' });
+              setActiveTab('courier');
+            }}
             className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer ${
               activeTab === 'courier'
                 ? 'bg-[#FF5400] text-white shadow-md'
@@ -121,7 +147,10 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
           </button>
 
           <button
-            onClick={() => setActiveTab('restaurant')}
+            onClick={() => {
+              trackBecomePartnerClick({ location: 'partner_tab_switcher', action: 'open_form' });
+              setActiveTab('restaurant');
+            }}
             className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer ${
               activeTab === 'restaurant'
                 ? 'bg-neutral-900 text-white shadow-md'
@@ -497,6 +526,13 @@ export const PartnerApplicationSection: React.FC<PartnerApplicationSectionProps>
                       href="http://213.199.59.185:3000/auth/register"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        trackBecomePartnerClick({
+                          location: 'restaurant_form_header_btn',
+                          action: 'open_portal',
+                          details: { url: 'http://213.199.59.185:3000/auth/register' }
+                        });
+                      }}
                       className="inline-flex items-center justify-center gap-2 bg-[#FF5400] hover:bg-[#E04B00] text-white text-xs sm:text-sm font-extrabold px-4 py-2.5 rounded-xl shadow-xs transition-all active:scale-98 shrink-0"
                     >
                       <Store className="w-4 h-4" />

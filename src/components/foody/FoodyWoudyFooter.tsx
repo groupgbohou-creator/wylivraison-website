@@ -15,6 +15,13 @@ import {
 import { WoudyWordmark } from '../WoudyWordmark';
 import { GooglePlayLogo } from '../GooglePlayLogo';
 import { AppStoreLogo } from '../AppStoreLogo';
+import { 
+  trackWhatsAppClick, 
+  trackContactWoudy, 
+  trackDownloadAppClick, 
+  trackBecomePartnerClick, 
+  trackInstagramClick 
+} from '../../utils/analytics';
 
 export const FoodyWoudyFooter: React.FC = () => {
   const [activeLegalModal, setActiveLegalModal] = useState<string | null>(null);
@@ -74,12 +81,26 @@ export const FoodyWoudyFooter: React.FC = () => {
                   href="https://wa.me/2250720584171?text=Bonjour%20Woudy%2C%20je%20souhaite%20commander" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackWhatsAppClick({
+                      purpose: 'support',
+                      location: 'footer_top_propositions',
+                      phone: '+2250720584171',
+                    });
+                  }}
                   className="text-emerald-400 hover:text-emerald-300 font-bold transition-colors"
                 >
                   WhatsApp : +225 07 20 58 41 71
                 </a>
                 <a 
                   href="tel:+2252731944568" 
+                  onClick={() => {
+                    trackContactWoudy({
+                      method: 'phone',
+                      contact_detail: '+2252731944568',
+                      location: 'footer_top_propositions',
+                    });
+                  }}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
                   Tél : +225 27 31 94 45 68
@@ -120,6 +141,23 @@ export const FoodyWoudyFooter: React.FC = () => {
               </p>
               <p className="text-neutral-300">
                 <strong className="text-neutral-400 font-sans">WhatsApp :</strong> +225 07 20 58 41 71
+              </p>
+              <p className="text-neutral-300">
+                <strong className="text-neutral-400 font-sans">Instagram :</strong>{' '}
+                <a 
+                  href="https://instagram.com/woudylivraison"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackInstagramClick({
+                      location: 'footer_contacts_card',
+                      url: 'https://instagram.com/woudylivraison',
+                    });
+                  }}
+                  className="text-orange-400 hover:underline"
+                >
+                  @woudylivraison
+                </a>
               </p>
               <p className="text-neutral-300">
                 <strong className="text-neutral-400 font-sans">Raison sociale :</strong> WOUDY LIVRAISON SARL
@@ -203,6 +241,13 @@ export const FoodyWoudyFooter: React.FC = () => {
                   href="http://213.199.59.185:3000/auth/register"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackBecomePartnerClick({
+                      location: 'footer_column_links',
+                      action: 'open_portal',
+                      details: { url: 'http://213.199.59.185:3000/auth/register' }
+                    });
+                  }}
                   className="text-orange-400 hover:text-orange-300 font-bold transition-colors inline-flex items-center gap-1"
                 >
                   <span>Devenez restaurant partenaire</span>
@@ -227,6 +272,13 @@ export const FoodyWoudyFooter: React.FC = () => {
                 href={googlePlayUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'google_play',
+                    location: 'footer_app_badge',
+                    url: googlePlayUrl,
+                  });
+                }}
                 className="flex items-center bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 p-2.5 rounded-2xl transition-all group cursor-pointer"
               >
                 <GooglePlayLogo variant="badge" />
@@ -234,6 +286,12 @@ export const FoodyWoudyFooter: React.FC = () => {
 
               <a
                 href="#telecharger"
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'apple_app_store',
+                    location: 'footer_app_badge',
+                  });
+                }}
                 className="flex items-center bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 p-2.5 rounded-2xl transition-all group cursor-pointer"
               >
                 <AppStoreLogo variant="badge" theme="dark" />
@@ -246,6 +304,13 @@ export const FoodyWoudyFooter: React.FC = () => {
                   href={googlePlayUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackDownloadAppClick({
+                      store: 'google_play',
+                      location: 'footer_direct_play_link',
+                      url: googlePlayUrl,
+                    });
+                  }}
                   className="text-[10px] text-orange-400 hover:text-orange-300 break-all underline underline-offset-2 flex items-center gap-1 font-mono"
                 >
                   <ExternalLink className="w-2.5 h-2.5 shrink-0" />
@@ -265,6 +330,21 @@ export const FoodyWoudyFooter: React.FC = () => {
             © 2026 WOUDY LIVRAISON SARL. Tous droits réservés. Abidjan, Côte d'Ivoire.
           </div>
           <div className="flex items-center gap-4 flex-wrap">
+            <a 
+              href="https://instagram.com/woudylivraison"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackInstagramClick({
+                  location: 'footer_bottom_copyright_bar',
+                  url: 'https://instagram.com/woudylivraison',
+                });
+              }}
+              className="text-neutral-400 hover:text-white transition-colors font-medium flex items-center gap-1"
+            >
+              <span>Instagram</span>
+            </a>
+            <span>•</span>
             <span>Agrément ARTCI / MIN-TRANS-2024-0492</span>
             <span>•</span>
             <span>Règlement conforme aux lois ivoiriennes</span>

@@ -14,6 +14,7 @@ import {
 import { WoudyLogoMark } from './WoudyLogo';
 import { GooglePlayLogo } from './GooglePlayLogo';
 import { AppStoreLogo } from './AppStoreLogo';
+import { trackDownloadAppClick, trackWhatsAppClick } from '../utils/analytics';
 
 interface AppDownloadModalProps {
   isOpen: boolean;
@@ -29,6 +30,10 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
   const handleSendLink = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phoneNumber.trim()) return;
+    trackDownloadAppClick({
+      store: 'sms',
+      location: 'modal_sms_form',
+    });
     setSentSuccess(true);
     setTimeout(() => {
       setSentSuccess(false);
@@ -94,7 +99,10 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
               href="#ios-download"
               onClick={(e) => {
                 e.preventDefault();
-                // iOS redirection
+                trackDownloadAppClick({
+                  store: 'apple_app_store',
+                  location: 'modal_ios_button',
+                });
               }}
               className="flex items-center justify-between p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group border border-neutral-700/60"
             >
@@ -110,6 +118,13 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'google_play',
+                    location: 'modal_android_button',
+                    url: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share',
+                  });
+                }}
                 className="flex items-center justify-between p-4 rounded-2xl bg-neutral-900 hover:bg-neutral-800 text-white transition-all shadow-sm group border border-neutral-700/60 hover:border-[#FF5400]/50"
               >
                 <GooglePlayLogo variant="badge" />
@@ -121,6 +136,13 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'google_play',
+                    location: 'modal_android_direct_link',
+                    url: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share',
+                  });
+                }}
                 className="text-[11px] text-neutral-500 hover:text-[#FF5400] transition-colors mt-1.5 px-1 truncate flex items-center gap-1"
                 title="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
               >
@@ -149,6 +171,12 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ isOpen, onCl
               href="https://wa.me/2250720584171?text=Bonjour%20Woudy%2C%20je%20veux%20commander%20un%20plat"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackWhatsAppClick({
+                  purpose: 'order',
+                  location: 'modal_whatsapp_order_btn',
+                });
+              }}
               className="shrink-0 bg-[#FF5400] hover:bg-[#E04B00] text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer shadow-xs shadow-orange-500/20"
             >
               Ouvrir WhatsApp (+225 07 20 58 41 71)

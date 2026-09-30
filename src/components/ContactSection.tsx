@@ -9,9 +9,15 @@ import {
   Store, 
   Bike, 
   HelpCircle,
-  Briefcase
+  Briefcase,
+  Instagram
 } from 'lucide-react';
 import { ContactFormData } from '../types';
+import { 
+  trackContactWoudy, 
+  trackWhatsAppClick, 
+  trackInstagramClick 
+} from '../utils/analytics';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -28,6 +34,11 @@ export const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    trackContactWoudy({
+      method: 'form_submit',
+      contact_detail: `Subject: ${formData.subject} | Zone: ${formData.neighborhood}`,
+      location: 'contact_section_form',
+    });
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -86,6 +97,13 @@ export const ContactSection: React.FC = () => {
                 href="https://wa.me/2250720584171?text=Bonjour%20Woudy%20Livraison%2C%20j%27ai%20une%20question"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackWhatsAppClick({
+                    purpose: 'support',
+                    location: 'contact_section_whatsapp_box',
+                    phone: '+2250720584171',
+                  });
+                }}
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#FF5400] hover:bg-[#E04B00] text-white font-bold text-xs py-3 rounded-xl shadow-xs shadow-orange-500/20 transition-colors cursor-pointer"
               >
                 <span>Démarrer un chat WhatsApp (+225 07 20 58 41 71)</span>
@@ -114,10 +132,22 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <h4 className="text-xs font-bold uppercase text-neutral-400">Emails Officiels</h4>
                   <p className="text-sm font-semibold text-neutral-800 mt-0.5">
-                    <a href="mailto:info@woudys.com" className="hover:text-[#FF5400] transition-colors">info@woudys.com</a>
+                    <a 
+                      href="mailto:info@woudys.com" 
+                      onClick={() => trackContactWoudy({ method: 'email', contact_detail: 'info@woudys.com', location: 'contact_info_card' })}
+                      className="hover:text-[#FF5400] transition-colors"
+                    >
+                      info@woudys.com
+                    </a>
                   </p>
                   <p className="text-xs text-neutral-500">
-                    <a href="mailto:support@woudys.com" className="hover:text-[#FF5400] transition-colors">support@woudys.com</a>
+                    <a 
+                      href="mailto:support@woudys.com" 
+                      onClick={() => trackContactWoudy({ method: 'email', contact_detail: 'support@woudys.com', location: 'contact_info_card' })}
+                      className="hover:text-[#FF5400] transition-colors"
+                    >
+                      support@woudys.com
+                    </a>
                   </p>
                 </div>
               </div>
@@ -129,9 +159,45 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <h4 className="text-xs font-bold uppercase text-neutral-400">Standard Téléphonique</h4>
                   <p className="text-sm font-semibold text-neutral-800 mt-0.5">
-                    +225 27 31 94 45 68 / +225 07 20 58 41 71
+                    <a 
+                      href="tel:+2252731944568"
+                      onClick={() => trackContactWoudy({ method: 'phone', contact_detail: '+2252731944568', location: 'contact_info_card' })}
+                      className="hover:text-[#FF5400] transition-colors"
+                    >
+                      +225 27 31 94 45 68
+                    </a>
+                    {' / '}
+                    <a 
+                      href="tel:+2250720584171"
+                      onClick={() => trackContactWoudy({ method: 'phone', contact_detail: '+2250720584171', location: 'contact_info_card' })}
+                      className="hover:text-[#FF5400] transition-colors"
+                    >
+                      +225 07 20 58 41 71
+                    </a>
                   </p>
                   <p className="text-xs text-neutral-500">7j/7 de 10h00 à 23h30</p>
+                </div>
+              </div>
+
+              {/* Instagram Social Channel */}
+              <div className="flex items-start gap-3.5 pt-3 border-t border-neutral-100">
+                <div className="w-10 h-10 rounded-xl bg-neutral-100 text-neutral-700 flex items-center justify-center shrink-0">
+                  <Instagram className="w-5 h-5 text-[#FF5400]" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase text-neutral-400">Instagram Officiel</h4>
+                  <p className="text-sm font-semibold text-neutral-800 mt-0.5">
+                    <a 
+                      href="https://instagram.com/woudylivraison"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackInstagramClick({ location: 'contact_info_card', url: 'https://instagram.com/woudylivraison' })}
+                      className="hover:text-[#FF5400] transition-colors inline-flex items-center gap-1 font-bold text-[#FF5400]"
+                    >
+                      <span>@woudylivraison sur Instagram</span>
+                    </a>
+                  </p>
+                  <p className="text-xs text-neutral-500">Actualités gourmandes, promotions et coulisses</p>
                 </div>
               </div>
 

@@ -13,6 +13,7 @@ import {
 import { WoudyLogoMark } from './WoudyLogo';
 import { GooglePlayLogo } from './GooglePlayLogo';
 import { AppStoreLogo } from './AppStoreLogo';
+import { trackDownloadAppClick, trackWhatsAppClick } from '../utils/analytics';
 
 interface DownloadAppSectionProps {
   onOpenAppModal: () => void;
@@ -25,6 +26,10 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
   const handleSendLink = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phoneNumber.trim()) return;
+    trackDownloadAppClick({
+      store: 'sms',
+      location: 'download_section_sms_form',
+    });
     setSmsSent(true);
     setTimeout(() => {
       setPhoneNumber('');
@@ -59,7 +64,13 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
             <div className="flex flex-wrap items-center gap-4 pt-2">
               {/* Apple App Store */}
               <button
-                onClick={onOpenAppModal}
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'apple_app_store',
+                    location: 'download_section_button',
+                  });
+                  onOpenAppModal();
+                }}
                 className="flex items-center bg-white text-neutral-950 hover:bg-neutral-100 font-bold px-5 py-2.5 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
               >
                 <AppStoreLogo variant="badge" theme="light" />
@@ -70,6 +81,13 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
                 href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackDownloadAppClick({
+                    store: 'google_play',
+                    location: 'download_section_button',
+                    url: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share',
+                  });
+                }}
                 className="flex items-center bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-700 font-bold px-5 py-2.5 rounded-2xl transition-all shadow-md active:scale-98 cursor-pointer"
               >
                 <GooglePlayLogo variant="badge" />
@@ -80,6 +98,13 @@ export const DownloadAppSection: React.FC<DownloadAppSectionProps> = ({ onOpenAp
                 href="https://wa.me/2250720584171?text=Bonjour%20Woudy%2C%20je%20souhaite%20commander%20un%20repas%20%C3%A0%20Abidjan"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackWhatsAppClick({
+                    purpose: 'order',
+                    location: 'download_section_whatsapp_btn',
+                    phone: '+2250720584171',
+                  });
+                }}
                 className="flex items-center gap-2.5 bg-[#FF5400] hover:bg-[#E04B00] text-white font-bold px-5 py-3.5 rounded-2xl transition-all shadow-md shadow-orange-500/20 cursor-pointer text-sm"
               >
                 <MessageCircle className="w-5 h-5 fill-white" />

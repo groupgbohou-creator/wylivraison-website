@@ -15,6 +15,7 @@ import {
   Flame,
   CheckCircle2
 } from 'lucide-react';
+import { trackApplyCourierClick, trackBecomePartnerClick } from '../../utils/analytics';
 
 interface HomeHeroProps {
   onOrderNow: () => void;
@@ -158,7 +159,10 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               </button>
 
               <button
-                onClick={() => onOpenPartners('courier')}
+                onClick={() => {
+                  trackApplyCourierClick({ location: 'hero_action_btn', action: 'open_tab' });
+                  onOpenPartners('courier');
+                }}
                 className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-700 hover:text-[#FF5400] px-3 py-3 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
               >
                 <Bike className="w-4 h-4 text-[#FF5400]" />
@@ -169,6 +173,13 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                 href="http://213.199.59.185:3000/auth/register"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackBecomePartnerClick({
+                    location: 'hero_action_btn',
+                    action: 'open_portal',
+                    details: { url: 'http://213.199.59.185:3000/auth/register' },
+                  });
+                }}
                 className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-800 hover:text-[#FF5400] px-3 py-3 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
               >
                 <Store className="w-4 h-4 text-[#FF5400]" />

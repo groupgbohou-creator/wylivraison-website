@@ -18,6 +18,13 @@ import {
 } from 'lucide-react';
 import { WoudyWordmark } from '../WoudyWordmark';
 import { GooglePlayLogo } from '../GooglePlayLogo';
+import { 
+  trackWhatsAppClick, 
+  trackContactWoudy, 
+  trackDownloadAppClick, 
+  trackBecomePartnerClick, 
+  trackApplyCourierClick 
+} from '../../utils/analytics';
 
 interface FoodyHeaderProps {
   currentAddress: string;
@@ -92,6 +99,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="https://wa.me/2250720584171?text=Bonjour%20Woudy%2C%20je%20souhaite%20commander"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackWhatsAppClick({
+                  purpose: 'order',
+                  location: 'header_top_bar',
+                  phone: '+2250720584171',
+                });
+              }}
               className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 transition-colors font-bold"
               title="Discuter sur WhatsApp"
             >
@@ -103,6 +117,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
 
             <a 
               href="tel:+2252731944568" 
+              onClick={() => {
+                trackContactWoudy({
+                  method: 'phone',
+                  contact_detail: '+2252731944568',
+                  location: 'header_top_bar',
+                });
+              }}
               className="flex items-center gap-1 text-neutral-300 hover:text-white transition-colors font-medium"
               title="Appeler le service client"
             >
@@ -114,6 +135,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
 
             <a 
               href="mailto:support@woudys.com"
+              onClick={() => {
+                trackContactWoudy({
+                  method: 'email',
+                  contact_detail: 'support@woudys.com',
+                  location: 'header_top_bar',
+                });
+              }}
               className="hidden md:flex items-center gap-1 text-neutral-300 hover:text-white transition-colors font-medium"
               title="Support Woudy"
             >
@@ -127,6 +155,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackDownloadAppClick({
+                  store: 'google_play',
+                  location: 'header_top_bar_livreur_link',
+                  url: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur&pcampaignid=web_share',
+                });
+              }}
               className="hidden lg:flex items-center gap-1.5 hover:text-white transition-colors text-neutral-300 font-medium"
             >
               <GooglePlayLogo variant="icon" className="w-3.5 h-3.5" />
@@ -326,6 +361,7 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="#telecharger" 
               onClick={(e) => {
                 e.preventDefault();
+                trackDownloadAppClick({ store: 'direct', location: 'header_nav' });
                 onNavigateSection?.('telecharger');
               }}
               className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
@@ -338,6 +374,7 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="#partenaires" 
               onClick={(e) => {
                 e.preventDefault();
+                trackApplyCourierClick({ location: 'header_nav', action: 'open_tab' });
                 onNavigateSection?.('partenaires', 'courier');
               }}
               className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1"
@@ -350,6 +387,13 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="http://213.199.59.185:3000/auth/register" 
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackBecomePartnerClick({
+                  location: 'header_nav',
+                  action: 'open_portal',
+                  details: { url: 'http://213.199.59.185:3000/auth/register' }
+                });
+              }}
               className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap flex items-center gap-1 font-semibold"
             >
               <Store className="w-3.5 h-3.5 text-[#FF5400]" />
@@ -360,6 +404,7 @@ export const FoodyHeader: React.FC<FoodyHeaderProps> = ({
               href="#contact" 
               onClick={(e) => {
                 e.preventDefault();
+                trackContactWoudy({ method: 'section_navigate', location: 'header_nav' });
                 onNavigateSection?.('contact');
               }}
               className="px-3 py-1.5 rounded-xl text-neutral-700 hover:text-[#FF5400] hover:bg-white transition-all whitespace-nowrap"

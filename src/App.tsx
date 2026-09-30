@@ -15,6 +15,13 @@ import { ContactSection } from './components/ContactSection';
 import { HomeHero } from './components/home/HomeHero';
 import { OurServicesSection } from './components/home/OurServicesSection';
 import { PartnerApplicationSection } from './components/home/PartnerApplicationSection';
+import { 
+  trackPageView, 
+  trackDownloadAppClick, 
+  trackBecomePartnerClick, 
+  trackApplyCourierClick, 
+  trackContactWoudy 
+} from './utils/analytics';
 
 export default function App() {
   const burgerShopRestaurant = RESTAURANTS_DATA[0]; // Burger Shop
@@ -51,10 +58,27 @@ export default function App() {
   // Partner Application tab state (courier vs restaurant)
   const [partnerTab, setPartnerTab] = useState<'courier' | 'restaurant'>('courier');
 
+  const handleOpenAppModal = (sourceLocation: string = 'unknown') => {
+    trackDownloadAppClick({ store: 'modal', location: sourceLocation });
+    setAppModalOpen(true);
+  };
+
   const handleNavigateSection = (sectionId: string, targetPartnerTab?: 'courier' | 'restaurant') => {
     if (targetPartnerTab) {
       setPartnerTab(targetPartnerTab);
+      if (targetPartnerTab === 'courier') {
+        trackApplyCourierClick({ location: 'navigation', action: 'open_tab' });
+      } else {
+        trackBecomePartnerClick({ location: 'navigation', action: 'open_form' });
+      }
+    } else if (sectionId === 'telecharger') {
+      trackDownloadAppClick({ store: 'direct', location: 'nav_section' });
+    } else if (sectionId === 'contact') {
+      trackContactWoudy({ method: 'section_navigate', location: 'nav_section' });
     }
+
+    trackPageView(`Woudy Livraison – ${sectionId}`, `/#${sectionId}`);
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -167,10 +191,17 @@ export default function App() {
         onOpenCart={() => setIsCartDrawerOpen(true)}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        onOpenAppModal={() => setAppModalOpen(true)}
+        onOpenAppModal={() => handleOpenAppModal('header')}
         deliveryMode={deliveryMode}
         onDeliveryModeChange={setDeliveryMode}
-        onViewAllRestaurants={() => setViewMode(viewMode === 'burger-shop' ? 'all-restaurants' : 'burger-shop')}
+        onViewAllRestaurants={() => {
+          const next = viewMode === 'burger-shop' ? 'all-restaurants' : 'burger-shop';
+          setViewMode(next);
+          trackPageView(
+            next === 'all-restaurants' ? 'Woudy – Tous les restaurants' : 'Woudy – Burger Shop',
+            next === 'all-restaurants' ? '/catalogue' : '/burger-shop'
+          );
+        }}
         showingAllRestaurants={viewMode === 'all-restaurants'}
         onNavigateSection={handleNavigateSection}
       />
@@ -231,7 +262,10 @@ export default function App() {
                   </p>
                 </div>
                 <button
-                  onClick={() => setViewMode('burger-shop')}
+                  onClick={() => {
+                    setViewMode('burger-shop');
+                    trackPageView('Woudy – Burger Shop', '/burger-shop');
+                  }}
                   className="bg-[#FF5400] text-white font-extrabold text-xs px-4 py-2.5 rounded-xl hover:bg-[#E04B00] transition-colors cursor-pointer"
                 >
                   Retour au menu Burger Shop
@@ -239,12 +273,12 @@ export default function App() {
               </div>
 
               <RestaurantCatalog
-                onOpenAppModal={() => setAppModalOpen(true)}
+                onOpenAppModal={() => handleOpenAppModal('restaurant_catalog')}
               />
 
               <CoverageMap
                 initialAddress={currentAddress}
-                onOpenAppModal={() => setAppModalOpen(true)}
+                onOpenAppModal={() => handleOpenAppModal('coverage_map')}
               />
             </div>
           )}
@@ -252,7 +286,7 @@ export default function App() {
 
         {/* Téléchargement d'Applications - Liens pour Apple et Android avec liens officiels */}
         <DownloadAppSection
-          onOpenAppModal={() => setAppModalOpen(true)}
+          onOpenAppModal={() => handleOpenAppModal('download_section')}
         />
 
         {/* Section Partenaires - Deux formulaires de candidature interactifs (Livreur & Restaurant) */}
