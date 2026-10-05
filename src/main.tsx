@@ -1,10 +1,10 @@
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { initGlobalAnalyticsListeners } from './utils/analytics';
 
-// Initialize global Google Analytics 4 tracking listeners
+// Suivi GA4 de tous les clics sortants (stores, WhatsApp, Instagram, contact, portail partenaire)
 initGlobalAnalyticsListeners();
 
 createRoot(document.getElementById('root')!).render(
