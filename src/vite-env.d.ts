@@ -3,7 +3,6 @@
 /** Variables définies dans `.env` / `.env.development`. */
 interface ImportMetaEnv {
   readonly VITE_DELIVERY_MINUTES?: string;
-  readonly VITE_ADMIN_PORTAL_URL?: string;
   readonly VITE_PARTNER_PORTAL_URL?: string;
   readonly VITE_PARTNER_REGISTER_URL?: string;
   readonly VITE_CLIENT_APP_IOS_URL?: string;

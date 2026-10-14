@@ -22,9 +22,6 @@ export const STORE_LINKS = {
   },
 } as const;
 
-/** Back-office Woudy (Portail Admin). */
-export const ADMIN_PORTAL_URL = env(import.meta.env.VITE_ADMIN_PORTAL_URL);
-
 /** Espace restaurateurs (Portail Partenaires) et sa page d'inscription. */
 export const PARTNER_PORTAL_URL = env(import.meta.env.VITE_PARTNER_PORTAL_URL);
 export const PARTNER_REGISTER_URL = env(import.meta.env.VITE_PARTNER_REGISTER_URL);

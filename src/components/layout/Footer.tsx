@@ -1,7 +1,6 @@
 import { ArrowUp } from 'lucide-react';
 import type { ReactNode } from 'react';
 import {
-  ADMIN_PORTAL_URL,
   CONTACT,
   PARTNER_PORTAL_URL,
   PARTNER_REGISTER_URL,
@@ -89,9 +88,6 @@ export function Footer({ onOpenLegal }: { onOpenLegal: (doc: LegalDoc) => void }
           <Column title="Espaces pro">
             <FooterLink href={PARTNER_PORTAL_URL} external>
               Portail Partenaires
-            </FooterLink>
-            <FooterLink href={ADMIN_PORTAL_URL} external>
-              Portail Admin
             </FooterLink>
           </Column>
           <Column title="Contact">
