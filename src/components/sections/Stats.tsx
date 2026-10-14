@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
+import { DELIVERY_MINUTES } from '../../config';
 import { CountUp } from '../ui/CountUp';
 import { EASE_EXPO } from '../ui/Reveal';
 
 const STATS = [
-  { value: 30, unit: 'min', label: 'Délai moyen de livraison visé' },
+  { value: DELIVERY_MINUTES, unit: 'min', label: 'Délai moyen de livraison visé' },
   { value: 3, unit: 'clics', label: 'Pour passer commande' },
   { value: 5, unit: '', label: 'Moyens de paiement acceptés' },
   { value: 7, unit: 'j/7', label: 'Support sur WhatsApp' },

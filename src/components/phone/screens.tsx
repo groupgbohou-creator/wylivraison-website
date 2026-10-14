@@ -24,6 +24,7 @@ import {
   User,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { DELIVERY_MINUTES } from '../../config';
 import { ScooterIcon } from '../ui/icons';
 import { EASE_EXPO } from '../ui/Reveal';
 
@@ -40,9 +41,9 @@ const CATEGORIES = [
 ];
 
 const SPOTS = [
-  { emoji: '🍗', bg: 'linear-gradient(135deg,#FFB27A,#FF5400)', name: 'Chez Tantie Awa', type: 'Ivoirien · Braisés', time: '25 min', price: 'dès 2 500 F' },
-  { emoji: '🍔', bg: 'linear-gradient(135deg,#FFE08A,#FFB000)', name: 'Smash Riviera', type: 'Burgers · Street food', time: '20 min', price: 'dès 3 000 F' },
-  { emoji: '🍕', bg: 'linear-gradient(135deg,#FFB4A2,#E5383B)', name: 'Pizza Bella', type: 'Italien · Feu de bois', time: '30 min', price: 'dès 4 500 F' },
+  { emoji: '🍗', bg: 'linear-gradient(135deg,#FFB27A,#FF5400)', name: 'Chez Tantie Awa', type: 'Ivoirien · Braisés', time: `${Math.max(1, DELIVERY_MINUTES - 1)} min`, price: 'dès 2 500 F' },
+  { emoji: '🍔', bg: 'linear-gradient(135deg,#FFE08A,#FFB000)', name: 'Smash Riviera', type: 'Burgers · Street food', time: `${Math.max(1, DELIVERY_MINUTES - 2)} min`, price: 'dès 3 000 F' },
+  { emoji: '🍕', bg: 'linear-gradient(135deg,#FFB4A2,#E5383B)', name: 'Pizza Bella', type: 'Italien · Feu de bois', time: `${DELIVERY_MINUTES} min`, price: 'dès 4 500 F' },
 ];
 
 function TabBar() {
@@ -271,7 +272,7 @@ export function CheckoutScreen() {
 /* -------------------------------------------------------------------------- */
 
 const ROUTE = 'M56 92 V138 Q56 150 68 150 H138 Q150 150 150 162 V220 Q150 232 162 232 H214 Q226 232 226 244 V298';
-const TRIP_MINUTES = 12;
+const TRIP_MINUTES = Math.max(1, DELIVERY_MINUTES - 2);
 
 /** Progression 0 → 1 du livreur sur son trajet, jouée en boucle. */
 export function useRouteProgress(duration = 7) {
@@ -515,7 +516,7 @@ export function DeliveredScreen() {
         transition={{ delay: 0.65 }}
         className="mt-2 text-[11px] text-ink/55"
       >
-        Livré en 27 min · encore bien chaud 🔥
+        Livré en {Math.max(1, DELIVERY_MINUTES - 1)} min · encore bien chaud 🔥
       </motion.p>
 
       <motion.div

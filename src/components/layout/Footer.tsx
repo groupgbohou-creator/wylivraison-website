@@ -1,6 +1,13 @@
 import { ArrowUp } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { CONTACT, PARTNER_PORTAL_URL, STORE_LINKS, whatsappLink } from '../../config';
+import {
+  ADMIN_PORTAL_URL,
+  CONTACT,
+  PARTNER_PORTAL_URL,
+  PARTNER_REGISTER_URL,
+  STORE_LINKS,
+  whatsappLink,
+} from '../../config';
 import { Wordmark } from '../brand/Wordmark';
 import { InstagramIcon, WhatsAppIcon } from '../ui/icons';
 import { RevealLines } from '../ui/Reveal';
@@ -54,25 +61,37 @@ export function Footer({ onOpenLegal }: { onOpenLegal: (doc: LegalDoc) => void }
           <StoreButtons theme="light" size="lg" />
         </div>
 
-        <div className="grid grid-cols-2 gap-10 py-16 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-10 py-16 md:grid-cols-3 lg:grid-cols-5">
           <Column title="Application">
             {STORE_LINKS.client.ios && (
               <FooterLink href={STORE_LINKS.client.ios} external>
                 App Store
               </FooterLink>
             )}
-            <FooterLink href={STORE_LINKS.client.android} external>
-              Google Play
-            </FooterLink>
+            {STORE_LINKS.client.android && (
+              <FooterLink href={STORE_LINKS.client.android} external>
+                Google Play
+              </FooterLink>
+            )}
             <FooterLink href="#comment">Comment ça marche</FooterLink>
             <FooterLink href="#faq">FAQ</FooterLink>
           </Column>
           <Column title="Rejoindre Woudy">
-            <FooterLink href={STORE_LINKS.courier.android} external ga="apply_courier">
-              Devenir livreur
-            </FooterLink>
-            <FooterLink href={PARTNER_PORTAL_URL} external>
+            {STORE_LINKS.courier.android && (
+              <FooterLink href={STORE_LINKS.courier.android} external ga="apply_courier">
+                Devenir livreur
+              </FooterLink>
+            )}
+            <FooterLink href={PARTNER_REGISTER_URL} external ga="become_partner">
               Inscrire mon restaurant
+            </FooterLink>
+          </Column>
+          <Column title="Espaces pro">
+            <FooterLink href={PARTNER_PORTAL_URL} external>
+              Portail Partenaires
+            </FooterLink>
+            <FooterLink href={ADMIN_PORTAL_URL} external>
+              Portail Admin
             </FooterLink>
           </Column>
           <Column title="Contact">

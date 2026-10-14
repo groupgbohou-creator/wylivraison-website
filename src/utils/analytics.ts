@@ -10,7 +10,7 @@
  *   ('apply_courier', 'become_partner', 'coming_soon').
  */
 
-import { PARTNER_PORTAL_URL } from '../config';
+import { PARTNER_REGISTER_URL } from '../config';
 
 export const GA_MEASUREMENT_ID = 'G-CT1KNPQSZ9';
 
@@ -125,7 +125,7 @@ export const initGlobalAnalyticsListeners = () => {
       const intent = target.closest<HTMLElement>('[data-ga]')?.dataset.ga;
 
       if (intent === 'apply_courier') return trackApplyCourierClick({ location, url: href });
-      if (intent === 'become_partner' || href === PARTNER_PORTAL_URL)
+      if (intent === 'become_partner' || href === PARTNER_REGISTER_URL)
         return trackBecomePartnerClick({ location, url: href });
       if (intent === 'coming_soon')
         return trackDownloadAppClick({ store: 'coming_soon', location });

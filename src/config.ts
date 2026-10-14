@@ -1,35 +1,45 @@
 /**
  * Liens et coordonnées officiels Woudy.
- * Tout ce qui pointe vers l'extérieur du site est centralisé ici.
+ * Tout ce qui pointe vers l'extérieur du site est centralisé ici, et les valeurs
+ * viennent des fichiers `.env` / `.env.development` (variables `VITE_*`).
  */
 
+const env = (value: string | undefined) => (value ?? '').trim();
+
+/** Promesse de délai de livraison affichée sur le site, en minutes. */
+export const DELIVERY_MINUTES = Number(env(import.meta.env.VITE_DELIVERY_MINUTES)) || 10;
+
 export const STORE_LINKS = {
-  /** Application client (commander un repas). */
+  /** Application client (commander un repas). Lien iOS vide = bouton « Bientôt ». */
   client: {
-    // À renseigner dès que l'app est publiée sur l'App Store (ex. https://apps.apple.com/ci/app/woudy/id0000000000).
-    // Tant que la valeur est vide, le bouton App Store s'affiche en « Bientôt ».
-    ios: '',
-    // Lien Play Store utilisé jusqu'ici par l'ancien site pour tous les boutons « Télécharger ».
-    android: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur',
+    ios: env(import.meta.env.VITE_CLIENT_APP_IOS_URL),
+    android: env(import.meta.env.VITE_CLIENT_APP_ANDROID_URL),
   },
   /** Application livreur (Woudy Livreur). */
   courier: {
-    ios: '',
-    android: 'https://play.google.com/store/apps/details?id=ci.woudy.livreur',
+    ios: env(import.meta.env.VITE_COURIER_APP_IOS_URL),
+    android: env(import.meta.env.VITE_COURIER_APP_ANDROID_URL),
   },
 } as const;
 
-export const PARTNER_PORTAL_URL = 'http://213.199.59.185:3000/auth/register';
+/** Back-office Woudy (Portail Admin). */
+export const ADMIN_PORTAL_URL = env(import.meta.env.VITE_ADMIN_PORTAL_URL);
+
+/** Espace restaurateurs (Portail Partenaires) et sa page d'inscription. */
+export const PARTNER_PORTAL_URL = env(import.meta.env.VITE_PARTNER_PORTAL_URL);
+export const PARTNER_REGISTER_URL = env(import.meta.env.VITE_PARTNER_REGISTER_URL);
+
+const phoneNumber = env(import.meta.env.VITE_PHONE_NUMBER);
 
 export const CONTACT = {
-  whatsappDisplay: '+225 07 20 58 41 71',
-  whatsappNumber: '2250720584171',
-  phoneDisplay: '+225 27 31 94 45 68',
-  phoneHref: 'tel:+2252731944568',
-  emailInfo: 'info@woudys.com',
-  emailSupport: 'support@woudys.com',
-  instagramHandle: '@woudylivraison',
-  instagramUrl: 'https://instagram.com/woudylivraison',
+  whatsappDisplay: env(import.meta.env.VITE_WHATSAPP_DISPLAY),
+  whatsappNumber: env(import.meta.env.VITE_WHATSAPP_NUMBER),
+  phoneDisplay: env(import.meta.env.VITE_PHONE_DISPLAY),
+  phoneHref: `tel:${phoneNumber}`,
+  emailInfo: env(import.meta.env.VITE_EMAIL_INFO),
+  emailSupport: env(import.meta.env.VITE_EMAIL_SUPPORT),
+  instagramHandle: env(import.meta.env.VITE_INSTAGRAM_HANDLE),
+  instagramUrl: env(import.meta.env.VITE_INSTAGRAM_URL),
 } as const;
 
 export const whatsappLink = (message: string) =>

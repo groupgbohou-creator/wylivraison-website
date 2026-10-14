@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, Banknote, Clock3, MapPinned, ShoppingBag, UtensilsCrossed, Wallet } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { whatsappLink } from '../../config';
+import { DELIVERY_MINUTES, whatsappLink } from '../../config';
 import { useRouteProgress, TrackingMap } from '../phone/screens';
 import { CountUp } from '../ui/CountUp';
 import { WhatsAppIcon } from '../ui/icons';
@@ -83,7 +83,7 @@ function SpeedRing() {
           strokeLinecap="round"
           strokeDasharray={c}
           initial={{ strokeDashoffset: c }}
-          whileInView={{ strokeDashoffset: c * 0.5 }}
+          whileInView={{ strokeDashoffset: c * (1 - Math.min(DELIVERY_MINUTES, 60) / 60) }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 1.6, ease: EASE_EXPO }}
         />
@@ -103,7 +103,7 @@ function SpeedRing() {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span className="font-display flex items-start text-[clamp(4.5rem,11vw,7rem)] font-bold leading-none text-brand">
-          <CountUp to={30} />
+          <CountUp to={DELIVERY_MINUTES} />
         </span>
         <span className="mt-1 text-sm font-semibold uppercase tracking-[0.25em] text-cream/60">minutes</span>
       </div>

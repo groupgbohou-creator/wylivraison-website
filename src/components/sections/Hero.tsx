@@ -8,6 +8,7 @@ import {
 } from 'motion/react';
 import { Banknote, Check, Flame } from 'lucide-react';
 import { useRef, type ReactNode } from 'react';
+import { DELIVERY_MINUTES } from '../../config';
 import { useIntroDone } from '../../lib/intro';
 import { PhoneFrame } from '../phone/PhoneFrame';
 import { TrackingScreen } from '../phone/screens';
@@ -121,7 +122,7 @@ export function Hero() {
               'Abidjan a faim ?',
               'Woudy livre en',
               <span className="relative inline-block text-brand">
-                30 minutes.
+                {DELIVERY_MINUTES} minutes.
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 320 20"

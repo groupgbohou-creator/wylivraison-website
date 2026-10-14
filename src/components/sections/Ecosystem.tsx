@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUpRight, Check, ChefHat, ShoppingBag } from 'lucide-react';
 import { useState, type ComponentType, type ReactNode } from 'react';
-import { PARTNER_PORTAL_URL, whatsappLink } from '../../config';
+import { PARTNER_REGISTER_URL, STORE_LINKS, whatsappLink } from '../../config';
 import { useMediaQuery } from '../../lib/useMediaQuery';
 import { ScooterIcon } from '../ui/icons';
 import { EASE_EXPO, Eyebrow, FadeUp, RevealLines } from '../ui/Reveal';
@@ -41,6 +41,7 @@ const PROFILES: Profile[] = [
       <div className="flex flex-wrap items-center gap-3">
         <span data-ga="apply_courier" className="contents">
           <StoreButton store="android" app="courier" theme="light" />
+          {STORE_LINKS.courier.ios && <StoreButton store="ios" app="courier" theme="light" />}
         </span>
         <a
           href={whatsappLink('Bonjour Woudy, je souhaite devenir livreur')}
@@ -63,7 +64,7 @@ const PROFILES: Profile[] = [
     muted: 'text-white/75',
     cta: (
       <motion.a
-        href={PARTNER_PORTAL_URL}
+        href={PARTNER_REGISTER_URL}
         target="_blank"
         rel="noopener noreferrer"
         data-ga="become_partner"
